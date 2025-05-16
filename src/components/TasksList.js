@@ -106,8 +106,10 @@ const [editingId, setEditingId] = useState(null);
         </button>
       </form>
 
+      <div className="center">
 
-      <table className="center">
+ 
+      <table>
         <thead>
           <tr>
             <th>Title</th>
@@ -127,20 +129,16 @@ const [editingId, setEditingId] = useState(null);
               <td>{t.priority}</td>
               <td>{t.status}</td>
               {/* <td>{t.due_date}</td> */}
-              <td>
-              <button onClick={() => handleEdit(t)} className='editButton'>Edit</button> <button onClick={() => handleDelete(t.id)} className="deleteButton">Delete</button>
+              <td className='buttonClass'>
+              <button onClick={() => handleEdit(t)} className='editButton'>Edit</button> 
+             &nbsp; &nbsp; &nbsp;
+              <button onClick={() => handleDelete(t.id)} className="deleteButton">Delete</button>
               </td>  
-              {/* <td>
-                <Popup trigger=
-                {<button className='editButton'onClick={() => setShowForm(true)}>Edit</button>}
-                position="right center">
-                
-            </Popup>
-              </td> */}
             </tr>
           ))}
-        </tbody></table>
-            
+        </tbody>
+        </table>
+                 </div>
     </div>
   );
   
