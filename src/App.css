@@ -1,7 +1,8 @@
 .App {
   text-align: center;
+  
 }
-
+/* 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -35,4 +36,30 @@
   to {
     transform: rotate(360deg);
   }
+} */
+.center {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    border: 1px solid;
+    
+}
+.actionCol{
+   margin: auto;
+    width: 50%;
+}
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+tr:hover {background-color: rgb(167, 185, 190);}
+.editButton{
+    color:rgb(26, 146, 186);
+    cursor:pointer;
+}
+.deleteButton{
+    color:rgb(202, 53, 23);
+    cursor:pointer;
 }
