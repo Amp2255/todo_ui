@@ -10,7 +10,7 @@ const [showForm, setShowForm] = useState(false);
 const [tasks, setTasks] = useState([]);
 const [form, setForm] = useState({ title: '', status: '' ,description:'',priority:''});
 const [editingId, setEditingId] = useState(null);
-
+const [isFocussed, setIsFocussed] = useState(false);
   useEffect(() => {
     fetchTasks();
   }, []);
@@ -20,7 +20,11 @@ const [editingId, setEditingId] = useState(null);
     const res = await axios.get(API_URL);
     setTasks(res.data.data);
   };
-
+  const handleFocus= async (e)=>{
+    console.log("form focus active")
+    setIsFocussed(!isFocussed)
+    console.log("isFocussed" + !isFocussed)
+  }
   const handleSubmit = async (e) => {
     
     e.preventDefault();
@@ -40,12 +44,14 @@ const [editingId, setEditingId] = useState(null);
       await axios.post(API_URL,form);
     }
     setForm({ title: '', status: '' ,description: '',priority: ''});
+    
     setEditingId(null);
     fetchTasks();
+    setIsFocussed(!isFocussed)
   };
  
   const handleEdit = (task) => {
-    
+    setIsFocussed(!isFocussed)
     setForm({ title: task.title, status: task.status, description:task.description ,priority:task.priority});
     setEditingId(task.id);
   };
@@ -62,14 +68,16 @@ const [editingId, setEditingId] = useState(null);
   return (
     
      <div >
+
      <h1 >My To-do List</h1>
-  
-      <form onSubmit={handleSubmit} className="taskFormClass">
+      <div className="taskFormClass" id={isFocussed ? "focusTrue" : "focusFalse"}>
+      <form  onSubmit={handleSubmit}  >
         <input
           className="border p-2 mr-2"
           value={form.title}
           onChange={(e) => setForm({ ...form, title: e.target.value })}
           placeholder="Task title"
+          maxLength={15}
           required
         />
         <input
@@ -100,12 +108,14 @@ const [editingId, setEditingId] = useState(null);
           <option value="pending">Pending</option>
           <option value="completed">Completed</option>
         </select>
-        
+        &nbsp;
         <button className="bg-blue-500 text-white px-4 py-2 rounded" type="submit">
           {editingId ? 'Update' : 'Add'}
         </button>
+        
       </form>
-
+      </div>
+      <br></br>
       <div className="center">
 
  
@@ -125,12 +135,12 @@ const [editingId, setEditingId] = useState(null);
           {tasks.map(t => (
             <tr key={t.id}>
               <td>{t.title}</td>
-              <td>{t.description}</td>
+              <td className='descClass'>{t.description}</td>
               <td>{t.priority}</td>
               <td>{t.status}</td>
               {/* <td>{t.due_date}</td> */}
               <td className='buttonClass'>
-              <button onClick={() => handleEdit(t)} className='editButton'>Edit</button> 
+              <button onFocus={handleFocus} onClick={() => handleEdit(t)}  className='editButton' >Edit</button> 
              &nbsp; &nbsp; &nbsp;
               <button onClick={() => handleDelete(t.id)} className="deleteButton">Delete</button>
               </td>  

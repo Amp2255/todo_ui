@@ -86,19 +86,23 @@ table {
 }
 
 thead {
+  border: #302a2a;
+  border-width: 1em;
   background-color: #f4f4f4;
   position: sticky;
   top: 0;
   z-index: 1;
 }
 
-thead th, tbody td {
-  padding: 10px;
- 
-  text-align: left;
+.taskFormClass{
+  background-color: #eec9c9;
+ width: 100%;
   
- 
 }
+#focusTrue {
+  background-color: red;
+}
+
 
 tbody {
   display: block;
@@ -107,9 +111,14 @@ tbody {
 }
 
 thead, tbody tr {
-  padding: 10px;
+  /* padding: 10px; */
   display: table;
   width: 100%;
   table-layout: fixed;
+  text-align: left;
   
+  
+}
+.descClass{
+text-wrap:initial;
 }
