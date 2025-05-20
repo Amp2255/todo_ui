@@ -115,7 +115,7 @@ thead, tbody tr {
   display: table;
   width: 100%;
   table-layout: fixed;
-  text-align: left;
+  /* text-align: left; */
   
   
 }

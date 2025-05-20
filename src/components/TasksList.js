@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+
 
 const API_URL = 'http://127.0.0.1:8080/tasks';
 
 function TasksList() {
 const [showForm, setShowForm] = useState(false);
 const [tasks, setTasks] = useState([]);
-const [form, setForm] = useState({ title: '', status: '' ,description:'',priority:''});
+const [form, setForm] = useState({ title: '', status: '' ,description:'',priority:'',});
 const [editingId, setEditingId] = useState(null);
 const [isFocussed, setIsFocussed] = useState(false);
+const [dueDate, setDueDate] = useState(new Date());
+
   useEffect(() => {
     fetchTasks();
   }, []);
@@ -44,7 +48,6 @@ const [isFocussed, setIsFocussed] = useState(false);
       await axios.post(API_URL,form);
     }
     setForm({ title: '', status: '' ,description: '',priority: ''});
-    
     setEditingId(null);
     fetchTasks();
     setIsFocussed(!isFocussed)
@@ -108,6 +111,13 @@ const [isFocussed, setIsFocussed] = useState(false);
           <option value="pending">Pending</option>
           <option value="completed">Completed</option>
         </select>
+        
+        {/* <DatePicker
+          selected={dueDate}
+          onChange={(date) => setDueDate(date)}
+          dateFormat="yyyy-MM-dd"
+          placeholderText='Due Date'
+        /> */}
         &nbsp;
         <button className="bg-blue-500 text-white px-4 py-2 rounded" type="submit">
           {editingId ? 'Update' : 'Add'}
@@ -126,8 +136,8 @@ const [isFocussed, setIsFocussed] = useState(false);
             <th>Description</th>
             <th>Priority</th>
             <th>Status</th>
-            <th className="actionCol">Actions</th>
             {/* <th>DueDate</th> */}
+            <th className="actionCol">Actions</th>
           </tr>
         </thead>
     
